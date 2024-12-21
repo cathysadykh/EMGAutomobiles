@@ -17,20 +17,24 @@ namespace EMG.API.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Voiture>()
-                .HasOne(v => v.Marque)
-                .WithMany()
-                .HasForeignKey(v => v.MarqueId);
+             modelBuilder.Entity<Voiture>()
+            .HasOne(v => v.Marque)
+            .WithMany()
+            .HasForeignKey(v => v.MarqueId)
+            .OnDelete(DeleteBehavior.Restrict); 
 
-            modelBuilder.Entity<Voiture>()
-                .HasOne(v => v.Modele)
-                .WithMany()
-                .HasForeignKey(v => v.ModeleId);
+        
+        modelBuilder.Entity<Voiture>()
+            .HasOne(v => v.Modele)
+            .WithMany()
+            .HasForeignKey(v => v.ModeleId)
+            .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<ModeleVoiture>()
-                .HasOne(m => m.Marque)
-                .WithMany(m => m.Modeles)
-                .HasForeignKey(m => m.MarqueId);
+              modelBuilder.Entity<ModeleVoiture>()
+            .HasOne(m => m.Marque)
+            .WithMany(m => m.Modeles)
+            .HasForeignKey(m => m.MarqueId)
+            .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

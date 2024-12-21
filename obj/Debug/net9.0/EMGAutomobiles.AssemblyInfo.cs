@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EMGAutomobiles")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+266ccd8a1f4c03230c327cadacb6e717499a3c6e")]
 [assembly: System.Reflection.AssemblyProductAttribute("EMGAutomobiles")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EMGAutomobiles")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
