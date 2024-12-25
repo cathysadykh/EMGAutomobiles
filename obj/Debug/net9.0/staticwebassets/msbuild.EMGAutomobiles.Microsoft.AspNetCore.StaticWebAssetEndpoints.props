@@ -16,13 +16,13 @@
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\EMGAutomobiles.sk5ooxfjeu.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-xOFxVMIoRieAycS3u/kEM4AAJjk/3TmeZ/6KPvNzKp0="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1132"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022xOFxVMIoRieAycS3u/kEM4AAJjk/3TmeZ/6KPvNzKp0=\u0022"},{"Name":"Last-Modified","Value":"Wed, 18 Dec 2024 10:49:17 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1132"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022xOFxVMIoRieAycS3u/kEM4AAJjk/3TmeZ/6KPvNzKp0=\u0022"},{"Name":"Last-Modified","Value":"Fri, 31 Jan 2025 00:22:31 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/EMGAutomobiles/EMGAutomobiles.sk5ooxfjeu.bundle.scp.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\EMGAutomobiles.sk5ooxfjeu.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"sk5ooxfjeu"},{"Name":"integrity","Value":"sha256-xOFxVMIoRieAycS3u/kEM4AAJjk/3TmeZ/6KPvNzKp0="},{"Name":"label","Value":"_content/EMGAutomobiles/EMGAutomobiles.bundle.scp.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1132"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022xOFxVMIoRieAycS3u/kEM4AAJjk/3TmeZ/6KPvNzKp0=\u0022"},{"Name":"Last-Modified","Value":"Wed, 18 Dec 2024 10:49:17 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1132"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022xOFxVMIoRieAycS3u/kEM4AAJjk/3TmeZ/6KPvNzKp0=\u0022"},{"Name":"Last-Modified","Value":"Fri, 31 Jan 2025 00:22:31 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/EMGAutomobiles/favicon.61n19gt1b8.ico">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\favicon.ico'))</AssetFile>

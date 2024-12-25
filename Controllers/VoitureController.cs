@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using EMG.API.Services;
+using Microsoft.EntityFrameworkCore;
+using EMG.API.Data;
 using EMG.API.Modeles;
+using EMG.API.DTOs;
 
 namespace EMG.API.Controllers
 {
@@ -8,91 +10,84 @@ namespace EMG.API.Controllers
     [Route("api/[controller]")]
     public class VoitureController : ControllerBase
     {
-        private readonly IServiceVoiture _serviceVoiture;
+        private readonly ContexteApplication _contexte;
 
-        public VoitureController(IServiceVoiture serviceVoiture)
+        public VoitureController(ContexteApplication contexte)
         {
-            _serviceVoiture = serviceVoiture;
+            _contexte = contexte;
         }
 
-        /// <summary>
-        /// Obtenir toutes les voitures
-        /// </summary>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Voiture>>> ObtenirToutesVoitures()
         {
-            var voitures = await _serviceVoiture.ObtenirToutesVoitures();
-            return Ok(voitures);
+            return await _contexte.Voitures
+                .Include(v => v.Marque)
+                .Include(v => v.Modele)
+                .ToListAsync();
         }
 
-        /// <summary>
-        /// Obtenir une voiture par son ID
-        /// </summary>
         [HttpGet("{id}")]
         public async Task<ActionResult<Voiture>> ObtenirVoitureParId(int id)
         {
-            var voiture = await _serviceVoiture.ObtenirVoitureParId(id);
+            var voiture = await _contexte.Voitures
+                .Include(v => v.Marque)
+                .Include(v => v.Modele)
+                .FirstOrDefaultAsync(v => v.Id == id);
+
             if (voiture == null)
                 return NotFound();
 
-            return Ok(voiture);
+            return voiture;
         }
 
-        /// <summary>
-        /// Ajouter une nouvelle voiture
-        /// </summary>
         [HttpPost]
-        public async Task<ActionResult<Voiture>> AjouterVoiture(Voiture voiture)
+        public async Task<ActionResult<Voiture>> AjouterVoiture(VoitureCreationDto voitureDto)
         {
-            var nouvelleVoiture = await _serviceVoiture.AjouterVoiture(voiture);
-            return CreatedAtAction(nameof(ObtenirVoitureParId), new { id = nouvelleVoiture.Id }, nouvelleVoiture);
+            var voiture = new Voiture
+            {
+                MarqueId = voitureDto.MarqueId,
+                ModeleId = voitureDto.ModeleId,
+                Annee = voitureDto.Annee,
+                Prix = voitureDto.Prix,
+                Description = voitureDto.Description,
+                UrlImage = voitureDto.UrlImage,
+                EstDisponible = voitureDto.EstDisponible
+            };
+
+            _contexte.Voitures.Add(voiture);
+            await _contexte.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(ObtenirVoitureParId), new { id = voiture.Id }, voiture);
         }
 
-        /// <summary>
-        /// Modifier une voiture existante
-        /// </summary>
         [HttpPut("{id}")]
-        public async Task<IActionResult> ModifierVoiture(int id, Voiture voiture)
+        public async Task<IActionResult> ModifierVoiture(int id, VoitureCreationDto voitureDto)
         {
-            var voitureModifiee = await _serviceVoiture.ModifierVoiture(id, voiture);
-            if (voitureModifiee == null)
+            var voiture = await _contexte.Voitures.FindAsync(id);
+            if (voiture == null)
                 return NotFound();
 
-            return Ok(voitureModifiee);
-        }
+            voiture.MarqueId = voitureDto.MarqueId;
+            voiture.ModeleId = voitureDto.ModeleId;
+            voiture.Annee = voitureDto.Annee;
+            voiture.Prix = voitureDto.Prix;
+            voiture.Description = voitureDto.Description;
+            voiture.UrlImage = voitureDto.UrlImage;
+            voiture.EstDisponible = voitureDto.EstDisponible;
 
-        /// <summary>
-        /// Supprimer une voiture
-        /// </summary>
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> SupprimerVoiture(int id)
-        {
-            var resultat = await _serviceVoiture.SupprimerVoiture(id);
-            if (!resultat)
-                return NotFound();
-
+            await _contexte.SaveChangesAsync();
             return NoContent();
         }
 
-        /// <summary>
-        /// Obtenir toutes les voitures disponibles
-        /// </summary>
-        [HttpGet("disponibles")]
-        public async Task<ActionResult<IEnumerable<Voiture>>> ObtenirVoituresDisponibles()
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> SupprimerVoiture(int id)
         {
-            var voitures = await _serviceVoiture.ObtenirVoituresDisponibles();
-            return Ok(voitures);
-        }
-
-        /// <summary>
-        /// Marquer une voiture comme indisponible
-        /// </summary>
-        [HttpPatch("{id}/indisponible")]
-        public async Task<IActionResult> MarquerCommeIndisponible(int id)
-        {
-            var resultat = await _serviceVoiture.MarquerCommeIndisponible(id);
-            if (!resultat)
+            var voiture = await _contexte.Voitures.FindAsync(id);
+            if (voiture == null)
                 return NotFound();
+
+            _contexte.Voitures.Remove(voiture);
+            await _contexte.SaveChangesAsync();
 
             return NoContent();
         }

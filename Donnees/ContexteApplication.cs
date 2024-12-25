@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using EMG.API.Modeles;
+using EMG.API.Modeles; // ou EMG.API.Modeles
+
 namespace EMG.API.Data
 {
     public class ContexteApplication : DbContext
@@ -12,29 +13,5 @@ namespace EMG.API.Data
         public DbSet<Voiture> Voitures { get; set; }
         public DbSet<Marque> Marques { get; set; }
         public DbSet<ModeleVoiture> ModelesVoiture { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-
-             modelBuilder.Entity<Voiture>()
-            .HasOne(v => v.Marque)
-            .WithMany()
-            .HasForeignKey(v => v.MarqueId)
-            .OnDelete(DeleteBehavior.Restrict); 
-
-        
-        modelBuilder.Entity<Voiture>()
-            .HasOne(v => v.Modele)
-            .WithMany()
-            .HasForeignKey(v => v.ModeleId)
-            .OnDelete(DeleteBehavior.Restrict);
-
-              modelBuilder.Entity<ModeleVoiture>()
-            .HasOne(m => m.Marque)
-            .WithMany(m => m.Modeles)
-            .HasForeignKey(m => m.MarqueId)
-            .OnDelete(DeleteBehavior.Restrict);
-        }
     }
 }

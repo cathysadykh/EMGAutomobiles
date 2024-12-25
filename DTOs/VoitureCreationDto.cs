@@ -1,25 +1,15 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace EMG.API.Modeles 
+namespace EMG.API.DTOs
 {
-    public class Voiture
+    public class VoitureCreationDto
     {
-        [Key]
-        public int Id { get; set; }
-
         [Required]
         public int MarqueId { get; set; }
 
-        [ForeignKey("MarqueId")]
-        public Marque Marque { get; set; }
-
         [Required]
         public int ModeleId { get; set; }
-
-        [ForeignKey("ModeleId")]
-        public ModeleVoiture Modele { get; set; }
 
         [Required]
         [Range(2010, 2025)]
@@ -34,7 +24,5 @@ namespace EMG.API.Modeles
         public string UrlImage { get; set; }
 
         public bool EstDisponible { get; set; } = true;
-
-        public DateTime DateAjout { get; set; } = DateTime.Now;
     }
 }
